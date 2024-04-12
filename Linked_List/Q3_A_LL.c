@@ -85,34 +85,22 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 void moveOddItemsToBack(LinkedList *ll)
-{	LinkedList oddList;
-	oddList.head = NULL;
-	oddList.size = 0;
-	int endIndex = 0;
-	int oddListsize = 0;
+{
+	int firstSize = ll->size;
+	int searchIndex = 0;
 
 	ListNode* cur = ll->head;
-	while (cur != NULL)
+	for (int i = 0; i<firstSize; i++)
 	{
 		int value = cur->item;
+		cur = cur->next;
 		if(value % 2 == 1){
-			cur = cur->next;
-			insertNode(&oddList,oddListsize,value);
-			oddListsize ++;
-			removeNode(ll, endIndex);
+			insertNode(ll,firstSize,value);
+			removeNode(ll, searchIndex);
 			continue;
 		}
-		cur = cur->next;
-		endIndex ++;
+		searchIndex++;
 	}
-
-	while (oddList.head != NULL){
-		int value = oddList.head->item;
-		insertNode(ll, endIndex, value);
-		removeNode(&oddList, 0);
-		endIndex ++;
-	}
-	return 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
