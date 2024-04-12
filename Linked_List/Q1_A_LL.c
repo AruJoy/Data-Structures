@@ -104,7 +104,6 @@ int insertSortedLL(LinkedList *ll, int item)
 		}
 	}
 
-
 	insertNode(ll, index, item);
 	return index;
 }
