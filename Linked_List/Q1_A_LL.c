@@ -90,7 +90,23 @@ int main()
 
 int insertSortedLL(LinkedList *ll, int item)
 {
-	/* add your code here */
+	int index = 0;
+	if (ll->head != NULL){
+		ListNode *cur = ll->head;
+		while (item >= cur->item )
+		{	
+			if(cur->next == NULL){
+			index++;
+			break;
+			}
+			cur = cur->next;
+			index ++;
+		}
+	}
+
+
+	insertNode(ll, index, item);
+	return index;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
