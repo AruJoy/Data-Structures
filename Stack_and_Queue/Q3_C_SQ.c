@@ -102,8 +102,22 @@ int main()
 /////////////////////////////////////////////////////////////////////////////////
 
 int isStackPairwiseConsecutive(Stack *s)
-{
-  /* add your code here */
+{	
+	if(s->ll.size%2 == 1){
+		return 0;
+	}
+	ListNode* oddNode = s->ll.head;
+	ListNode* evenNode = oddNode->next;
+  	while(1){
+		if((oddNode->item+1 != evenNode->item) & (oddNode->item-1!=evenNode->item)){
+			return 0;
+		}
+		if(evenNode->next == NULL){
+			return 1;
+		}
+		oddNode = evenNode->next;
+		evenNode = oddNode->next;
+  	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////
