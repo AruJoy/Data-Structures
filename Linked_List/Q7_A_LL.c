@@ -90,9 +90,9 @@ int main()
 	if(curNode->next == NULL){
 		return;
 	}
-	LinkedList* nextNode = curNode->next;
+	ListNode* nextNode = curNode->next;
 	RecursiveReverse(&nextNode);
-	
+
 	curNode->next->next = curNode;
 	curNode->next = NULL;
 	*ptrHead = nextNode;
