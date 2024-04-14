@@ -103,8 +103,44 @@ int main()
 
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
-{
-/* add your code here */
+{	
+	Stack compareStack;
+	char* charPointer = expression;
+	compareStack.ll.head = NULL;
+	compareStack.ll.size = 0;
+	while(*charPointer != NULL){
+		if(*charPointer == '('){
+			push(&compareStack, 1);
+		}
+		else if(*charPointer == ')'){
+			push(&compareStack, -1);
+		}
+		else if(*charPointer == '{'){
+			push(&compareStack, 2);
+		}
+		else if(*charPointer == '}'){
+			push(&compareStack, -2);
+		}
+		else if(*charPointer == '['){
+			push(&compareStack, 3);
+		}
+		else if(*charPointer == ']'){
+			push(&compareStack, -3);
+		}
+		charPointer = charPointer+1;
+	}
+	int* length = &(compareStack.ll.size);
+	int n_compare = *length/2;
+	int close;
+	int open;
+	for(int i = 0; i < n_compare; i++){
+		close = pop(&compareStack);
+		open = findNode(&compareStack.ll, *length-i-1)->item;
+		if(open+close != 0){
+			return 1;
+		}
+	}
+	return 0;
 }
 
 ////////////////////////////////////////////////////////////
