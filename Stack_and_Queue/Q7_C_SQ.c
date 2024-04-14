@@ -108,7 +108,7 @@ int balanced(char *expression)
 	char* charPointer = expression;
 	compareStack.ll.head = NULL;
 	compareStack.ll.size = 0;
-	while(*charPointer != NULL){
+	while(*charPointer != '\0'){
 		if(*charPointer == '('){
 			push(&compareStack, 1);
 		}
