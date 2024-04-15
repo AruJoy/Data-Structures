@@ -101,7 +101,29 @@ int main()
 int countOneChildNodes(BTNode *node)
 
 {
-    /* add your code here */
+    int count = 0;
+    BTNode* curNode = node;
+    Stack dfsStack;
+    dfsStack.top = NULL;
+    int children;
+    push(&dfsStack, curNode);
+    while (dfsStack.top != NULL)
+    {
+        children = 0;
+        curNode = pop(&dfsStack);
+        if(curNode->right != NULL){
+            children ++;
+            push(&dfsStack, curNode->right);
+        }
+        if(curNode->left != NULL){
+            children ++;
+            push(&dfsStack, curNode->left);
+        }
+        if(children == 1){
+            count++;
+        }
+    }
+    return count;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
