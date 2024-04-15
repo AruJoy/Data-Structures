@@ -95,9 +95,49 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 int maxHeight(BTNode *node)
-
 {
-    /* add your code here */
+    if(node == NULL){
+        return -1;
+    }
+    BTNode heightTree;
+    heightTree.item = 0;
+    heightTree.left = NULL;
+    heightTree.right = NULL;
+
+    BTNode* heightNode;
+    Stack heihgtStack;
+    heihgtStack.top = NULL;
+
+    BTNode* curNode = node;
+    Stack dfsStack;
+    dfsStack.top = NULL;
+    
+    int heightMax = 0;
+    int height = 0;
+
+    push(&dfsStack, node);
+    push(&heihgtStack, &heightTree);
+
+    while (dfsStack.top != NULL)
+    {   
+        curNode = pop(&dfsStack);
+        heightNode = pop(&heihgtStack);
+        height = heightNode->item;
+        if(curNode->left != NULL){
+            push(&dfsStack, curNode->left); 
+            heightNode->left = createBTNode(height+1);
+            push(&heihgtStack, heightNode->left);
+        }
+        if(curNode->left != NULL){
+            push(&dfsStack, curNode->left);
+            heightNode->right = createBTNode(height+1);
+            push(&heihgtStack, heightNode->right);
+        }
+        if(heightMax < height){
+            heightMax = height;
+        }
+    }
+    return heightMax;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
