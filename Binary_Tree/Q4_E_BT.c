@@ -103,7 +103,27 @@ int main()
 int sumOfOddNodes(BTNode *node)
 
 {
-    /* add your code here */
+    int sumOfNode = 0;
+    BTNode* curNode = node;
+    Stack dfsStack;
+    dfsStack.top = NULL;
+    push(&dfsStack, curNode);
+
+    while (dfsStack.top != NULL)
+    {
+        curNode = pop(&dfsStack);
+        if(curNode->item%2 == 1){
+            sumOfNode += curNode->item;
+        }
+        if(curNode->left != NULL){
+            push(&dfsStack, curNode->left);
+        }
+        if(curNode->right != NULL){
+            push(&dfsStack, curNode->right);
+        }
+    }
+
+    return sumOfNode;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
