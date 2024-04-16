@@ -118,19 +118,6 @@ int identical(BTNode *tree1, BTNode *tree2)
     BTNode* curNode1 = tree1;
     BTNode* curNode2 = tree2;
 
-    Stack tree1SearchStack;
-    tree1SearchStack.top = NULL;
-    Stack tree2SearchStack;
-    tree2SearchStack.top = NULL;
-
-    push(&tree1SearchStack, tree1);
-    push(&tree2SearchStack, tree2);
-
-    while (1)
-    {   
-        BTNode* curNode1 = pop(&tree1SearchStack);
-        BTNode* curNode2 = pop(&tree2SearchStack);
-
         if (curNode1->item != curNode2 -> item){
             return 0;
         }
@@ -138,8 +125,7 @@ int identical(BTNode *tree1, BTNode *tree2)
             if(curNode2->right == NULL){
                 return 0;
             }
-            push(&tree1SearchStack, curNode1->right);
-            push(&tree2SearchStack, curNode2->right);
+            return identical(curNode1->left, curNode2->left);
         }
         else if(curNode2->right != NULL){
             return 0;
@@ -148,13 +134,11 @@ int identical(BTNode *tree1, BTNode *tree2)
             if(curNode2->left == NULL){
                 return 0;
             }
-            push(&tree1SearchStack, curNode1->left);
-            push(&tree2SearchStack, curNode2->left);
+            return identical(curNode1->right, curNode2->right);
         }
         else if(curNode2->left != NULL){
             return 0;
         }
-    }
     return 1;
 }
 
