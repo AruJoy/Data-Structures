@@ -102,7 +102,30 @@ int main()
 
 int smallestValue(BTNode *node)
 {
-	/* add your code here */
+    if(node == NULL){
+        return 0;
+    }
+    BTNode* curNode = node; 
+    Stack dfsStack;
+    dfsStack.top = NULL;
+    int minValue = curNode->item;
+    int value;
+    push(&dfsStack, curNode);
+
+    while(dfsStack.top != NULL){
+        curNode = pop(&dfsStack);
+        value = curNode->item;
+        if(value < minValue){
+            minValue = value;
+        }
+        if(curNode->left != NULL){
+            push(&dfsStack, curNode->left); 
+        }
+        if(curNode->right != NULL){
+            push(&dfsStack, curNode->right); 
+        }
+    }
+    return minValue;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
