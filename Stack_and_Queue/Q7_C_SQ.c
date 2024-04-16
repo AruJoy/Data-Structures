@@ -136,7 +136,7 @@ int balanced(char *expression)
 	for(int i = 0; i < n_compare; i++){
 		close = pop(&compareStack);
 		open = findNode(&compareStack.ll, *length-i-1)->item;
-		if(open+close != 0){
+		if(open < 0 || open+close != 0){
 			return 1;
 		}
 	}
