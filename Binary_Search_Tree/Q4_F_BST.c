@@ -91,7 +91,84 @@ int main()
 
 void postOrderIterativeS1(BSTNode *root)
 {
-	 /* add your code here */
+	if(root == NULL){
+		return;
+	}
+	Stack dfsStack;
+	dfsStack.top = NULL;
+	BSTNode* curNode = root;
+	int lastdiversion = root->item;
+	push(&dfsStack, curNode);
+	BSTNode* lastOutput = root;
+
+	while (curNode->left != NULL){
+		push(&dfsStack, curNode->left);
+		curNode = curNode->left;
+	}
+	while (dfsStack.top != NULL){
+		if (curNode->left == NULL && curNode->right == NULL){
+			while (!(curNode->left != NULL && curNode->right != NULL))
+			{
+				if(lastOutput->item != curNode ->item){
+				printf("%d, ", curNode->item);
+				lastOutput = curNode;
+				}
+				curNode = peek(&dfsStack);
+				if(curNode->left==NULL || curNode->right==NULL){
+					pop(&dfsStack);
+				}
+			}	
+		}
+		if (curNode->left != NULL && curNode->right == NULL){
+			push(&dfsStack, curNode->left);
+			curNode = curNode->left;
+		}
+		if (curNode->left != NULL && curNode->right == NULL){
+			push(&dfsStack, curNode->right);
+			lastOutput = curNode;
+			curNode = curNode->right;
+		}
+		if (curNode->left != NULL && curNode->right != NULL){
+			if(lastOutput->item == curNode->left->item){
+				push(&dfsStack, curNode->right);
+				curNode = curNode->right;
+			}
+			else if(lastOutput->item == curNode->right->item){
+				pop(&dfsStack);
+				if(lastOutput->item != curNode ->item){
+					if(dfsStack.top == NULL){
+						printf("%d.", curNode->item);
+					}
+					else{
+						printf("%d, ", curNode->item );
+					}
+				}
+				lastOutput = curNode;
+				if(dfsStack.top != NULL){
+				curNode = peek(&dfsStack);
+				}
+				if(curNode->left==NULL || curNode->right==NULL){
+					pop(&dfsStack);
+				}
+				while (curNode->left == NULL || curNode->right == NULL)
+				{	
+					if(lastOutput->item != curNode ->item){
+					printf("%d, ", curNode->item);
+					}
+					lastOutput = curNode;
+					curNode = peek(&dfsStack);
+					if(curNode->left==NULL || curNode->right==NULL){
+						pop(&dfsStack);
+					}
+				}
+			}
+			else{
+				push(&dfsStack, curNode->left);
+				curNode = curNode->left;
+			}
+		}
+	}
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////
