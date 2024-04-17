@@ -90,8 +90,39 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 void preOrderIterative(BSTNode *root)
-{
-	 /* add your code here */
+{	
+	if(root == NULL){
+		return;
+	}
+	Stack dfsStack;
+	dfsStack.top = NULL;
+	BSTNode* curNode = root;
+	BSTNode* insertNode;
+	while (curNode != NULL){
+		printf("%d, ", curNode->item);
+		push(&dfsStack, curNode);
+		curNode = curNode->left;
+	}
+	while (dfsStack.top != NULL){
+		curNode = pop(&dfsStack); 
+		if(curNode->right != NULL){
+			insertNode = curNode->right;
+			while (insertNode != NULL)
+			{	
+				printf("%d", insertNode->item);
+				if(dfsStack.top == NULL && insertNode->left == NULL && insertNode->right == NULL){
+					printf(".");
+				}
+				else{
+					printf(", ");
+				}
+				push(&dfsStack, insertNode);
+				insertNode = insertNode->left;
+			}
+		}
+	}
+	
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////

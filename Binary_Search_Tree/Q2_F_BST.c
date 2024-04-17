@@ -90,6 +90,9 @@ int main()
 
 void inOrderTraversal(BSTNode *root)
 {
+	if(root == NULL){
+		return;
+	}
 	BSTNode* curNode = root;
 	Stack dfsStack;
 	dfsStack.top = NULL;
@@ -115,6 +118,7 @@ void inOrderTraversal(BSTNode *root)
 		}
 	}
 	printf(".\n");
+	return;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
